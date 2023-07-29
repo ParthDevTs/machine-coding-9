@@ -7,6 +7,7 @@ import WatchLaterPage from './pages/WatchLater';
 import PlayList from './pages/PlayList';
 import Explore from './pages/Explore';
 import PlayListDialog from './components/playListDialog';
+import PlaylistView from './pages/PlaylistView';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/watchLater' element={<WatchLaterPage />}></Route>
         <Route path='/playlists' element={<PlayList />}></Route>
         <Route path='/explore' element={<Explore />}></Route>
+        <Route path="/playlist/:playlistName" element={<PlaylistView />}></Route>
       </Routes>
     </div>
   );

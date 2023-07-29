@@ -22,6 +22,15 @@ export const VideoProvider = ({ children }) => {
         const findPlayList = playLists.find(({ name }) => name === newPlaylist)
         return findPlayList ? true : false
     }
+    const findVideoinPlaylist = (videoId, playlistName) => {
+        const video = videos.find(video => video._id === parseInt(videoId))
+        const exists = video.playlists.find(playlist => playlist === playlistName)
+        if (exists) {
+            return true
+        } else {
+            return false
+        }
+    }
 
 
     const addVideoToWatchLater = (video) => {
@@ -30,7 +39,7 @@ export const VideoProvider = ({ children }) => {
             toast.error("Already in WatchList")
         } else {
             setWatchLater([...watchLater, video])
-            localStorage.setItem("watchLaterList", JSON.stringify(watchLater))
+            localStorage.setItem("watchLaterList", JSON.stringify([...watchLater, video]))
             toast.success("Added to WatchLater")
         }
 
@@ -54,7 +63,7 @@ export const VideoProvider = ({ children }) => {
         if (!findInPlayLists(name)) {
             setPlayLists(prev => [...prev, newPlayList])
             toast.success("PlayList Created")
-            localStorage.setItem("playLists", JSON.stringify(playLists))
+            localStorage.setItem("playLists", JSON.stringify([...playLists, newPlayList]))
             setViewPlaylistDiaglog(false)
         } else {
             toast.error("Playlist already Exists")
@@ -70,13 +79,31 @@ export const VideoProvider = ({ children }) => {
     }
 
     const addVideoToPlayList = (videoId, playlistName) => {
+        if (findVideoinPlaylist(videoId, playlistName)) {
+            toast.error("Already Added to Playlist")
+            return false
+        }
         const newVideoList = videos.map(video => {
-            if (video._id === videoId) {
+            if (video._id === parseInt(videoId)) {
                 return { ...video, playlists: [...video.playlists, playlistName] }
             } else {
                 return video
             }
         })
+        setVideos(newVideoList)
+        toast(`Added to ${playlistName}`)
+    }
+
+    const addNotes = (videoId, note) => {
+
+        const newVideoList = videos.map(video => {
+            if (video._id === parseInt(videoId)) {
+                return { ...video, notes: [...video.notes, note] }
+            } else {
+                return video
+            }
+        })
+
         setVideos(newVideoList)
     }
 
@@ -88,7 +115,7 @@ export const VideoProvider = ({ children }) => {
         }
         const localStoragePlayList = localStorage.getItem("playLists")
         if (localStoragePlayList?.length > 0 && playLists?.length === 0) {
-            setWatchLater(JSON.parse(localStoragePlayList))
+            setPlayLists(JSON.parse(localStoragePlayList))
         }
         // eslint-disable-next-line
     }, [])
@@ -106,7 +133,9 @@ export const VideoProvider = ({ children }) => {
         createNewPlayList,
         deletePlayList,
         viewPlayListDialog, setViewPlaylistDiaglog,
-        addVideoToPlayList
+        addVideoToPlayList,
+        addNotes,
+        findVideoinPlaylist
     }}>
         {children}
     </VideoContext.Provider>

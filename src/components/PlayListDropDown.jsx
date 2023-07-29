@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { useVideo } from '../context/VideoContext'
 
 function PlayListDropDown({ videoId }) {
-    const [showDrpDwn, setShowDrpDown, deletePlayList, addVideoToPlayList] = useState(false)
-    const { playLists } = useVideo()
+    const [showDrpDwn, setShowDrpDown] = useState(false)
+    const { playLists, deletePlayList, addVideoToPlayList, setViewPlaylistDiaglog, findVideoinPlaylist } = useVideo()
     const handleAddToPlaylist = (videoId, playlistName) => {
         addVideoToPlayList(videoId, playlistName)
+        setShowDrpDown(false)
     }
 
     return (
-        <div className="relative">
+        <div className="relative z-10">
             <button onClick={() => setShowDrpDown(!showDrpDwn)} className="flex items-center z-10 justify-end tracking-wider border-transparent active:border-slate-500 duration-300 active:text-slate-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                     <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
@@ -18,12 +19,12 @@ function PlayListDropDown({ videoId }) {
 
 
             {showDrpDwn && (
-                <div className="bg-white  box-border border  absolute top-[40px] backdrop-filter backdrop-blur-xl shadow-lg w-[12rem]  flex flex-col gap-1  rounded-sm right-3 py-2 ">
+                <div className="bg-white z-10  box-border border  absolute top-[40px] backdrop-filter backdrop-blur-xl shadow-lg w-[12rem]  flex flex-col gap-1  rounded-sm right-3 py-2 ">
                     <p className="text-slate-800 px-4 w-full text-center  text-md">Add to Playlist</p>
-                    <div className="w-full flex flex-col gap-2 text-sm items-start">
+                    <div className="w-full z-10 flex flex-col gap-2 text-sm items-start">
                         {playLists.map((playlist) => {
                             return <li onClick={() => handleAddToPlaylist(videoId, playlist.name)} key={playlist._id}
-                                className="py-2 text-slate-600 cursor-pointer flex px-4  items-center justify-start w-full text-sm hover:bg-slate-100">
+                                className={` ${findVideoinPlaylist(videoId, playlist.name) ? "bg-slate-500 cursor-not-allowed" : "cursor-pointer hover:bg-slate-100"} py-2 text-slate-600 text-xs flex px-4  items-center justify-start w-full z-10`}>
                                 <p>{playlist.name}</p>
                                 <div className="spacer flex-grow"></div>
                                 <button onClick={(event) => {
@@ -37,18 +38,8 @@ function PlayListDropDown({ videoId }) {
                             </li>
                         })}
                     </div>
-                    <button className="del__button py-2 text-slate-600 flex px-4  items-center justify-start w-full   text-sm hover:bg-slate-100 ">
+                    <button onClick={() => { setViewPlaylistDiaglog(true); showDrpDwn(false) }} className="del__button py-2 text-slate-600 flex px-4  items-center justify-start w-full   text-sm hover:bg-slate-100 ">
                         <p className=" drop-shadow-lg">Create New Playlist</p>
-
-                    </button>
-                    <button className="edit__button py-2 px-4 text-slate-600 flex  items-center justify-center w-full text-sm hover:bg-slate-100 ">
-                        <p className=" drop-shadow-lg">Edit Post</p>
-                        <div className="spacer flex-grow"></div>
-                        <span className=" drop-shadow-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                            </svg>
-                        </span>
                     </button>
 
                 </div>
