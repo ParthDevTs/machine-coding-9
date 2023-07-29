@@ -7,8 +7,8 @@ import Videos from '../components/Videos'
 function PlaylistView() {
     const { playlistName } = useParams()
     const { videos } = useVideo()
-    const filteredVideos = videos.filter((video) => {
-        const exists = video.playlists.find(playlist => playlist === playlistName)
+    const filteredVideos = videos?.filter((video) => {
+        const exists = video?.playlists?.find(playlist => playlist === playlistName)
         if (exists) {
             return true
         } else {
