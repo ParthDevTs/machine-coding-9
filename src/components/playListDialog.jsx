@@ -14,7 +14,7 @@ function PlayListDialog() {
     return (
         <> {viewPlayListDialog &&
 
-            <div className="absolute h-screen w-screen flex items-center justify-center bg-black/70 z-10">
+            <div className="absolute min-h-screen w-full flex items-center justify-center bg-black/70 z-10">
                 <div className="dialogBox relative flex flex-col items-start justify-start bg-white p-10 w-[30rem] box-content gap-6 rounded drop-shadow-lg">
                     <h2 className="text-4xl drop-shadow-md">Create new Playlist</h2>
                     <ul className="w-full flex flex-col gap-2 text-sm items-start">
@@ -31,8 +31,8 @@ function PlayListDialog() {
                         })}
                     </ul>
                     <div className="w-full flex flex-col gap-2">
-                        <input value={playlistName} className="w-full bg-slate-600 px-4 py-2 text-white rounded" onChange={e => setplaylistName(e.target.value)} type="text" name="playlist" id="playlist" />
-                        <button onClick={handleCreateButton} type='submit' className="w-full">Create new Playlist</button>
+                        <input value={playlistName} className="w-full bg-slate-500 px-4 py-2 text-white rounded" onChange={e => setplaylistName(e.target.value)} type="text" name="playlist" id="playlist" />
+                        <button disabled={playlistName.length === 0} onClick={handleCreateButton} type='submit' className="w-full disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none bg-red-200 py-2 rounded hover:bg-red-400 hover:text-white shadow-lg hover:shadow-red-400 transition-all hover:font-bold">Create new Playlist</button>
                     </div>
                     <button onClick={() => setViewPlaylistDiaglog(false)} className="absolute -top-10 -right-10 text-white hover:text-red-700" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">

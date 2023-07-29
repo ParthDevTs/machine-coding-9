@@ -12,7 +12,7 @@ function PlayList() {
                 <div className="videoGallery grid grid-cols-4 h-full gap-x-8 gap-y-8 place-content-start grid-flow-row">
                     {playLists.map(playlist => {
                         return <li onClick={() => navigate(`/playlist/${playlist.name}`)} className=" relative flex  flex-col justify-between rounded cursor-pointer gap-2" key={playlist._id}>
-                            <img className="w-[10rem] h-[5.625rem]" src="https://picsum.photos/300/178" alt={playlist.name} />
+                            <img className="h-[8rem] w-full object-cover object-center rounded hover:scale-105 transition-all" src="https://picsum.photos/300/178" alt={playlist.name} />
                             <p>{playlist.name}</p>
                         </li>
                     })}

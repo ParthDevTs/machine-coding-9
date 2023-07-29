@@ -20,7 +20,7 @@ function Videos({ videoData }) {
             <div
                 onClick={() => navigate(`/video/${videoData._id}`)}
                 className="CategorySelectBox relative flex  w-[15rem]  flex-col justify-between rounded cursor-pointer gap-2">
-                <img className="h-[8rem] w-full object-cover object-center rounded"
+                <img className="h-[8rem] w-full object-cover object-center rounded hover:scale-105 transition-all"
                     src={videoData?.thumbnail} alt={videoData?.category} />
                 <p className="text-sm">{videoData?.title}</p>
                 <footer className="videoFooter flex gap-2 text-slate-600 text-xs">

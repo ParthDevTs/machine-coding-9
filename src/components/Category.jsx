@@ -9,7 +9,7 @@ function Category({ categoryData }) {
             onClick={() => navigate(`/category/${categoryData?.category}`)}
             className="CategorySelectBox flex h-[10rem] w-[15rem] flex-col justify-between rounded cursor-pointer"
         >
-            <img className="h-[8rem] w-full object-cover object-center rounded"
+            <img className="h-[8rem] w-full object-cover object-center rounded hover:scale-105 transition-all"
                 src={categoryData?.thumbnail} alt={categoryData?.category} />
             <p>{categoryData?.category}</p>
         </div>
