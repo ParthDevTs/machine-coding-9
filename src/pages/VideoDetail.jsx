@@ -19,9 +19,9 @@ function VideoDetail() {
         }
     }
     return (
-        <div className="VideoListing grid grid-cols-10">
+        <div className="VideoListing grid grid-cols-10 relative z-0">
             <LeftNavBar className="" />
-            <div className="category__section h-screen p-6 flex flex-col gap-6 col-span-5">
+            <div className="category__section h-screen p-6 z-0 relative flex flex-col gap-6 col-span-5">
                 <div className="video">
                     <iframe
                         className="w-full h-[30rem]"
@@ -32,7 +32,7 @@ function VideoDetail() {
                         allowFullScreen="true">
                     </iframe>
                 </div>
-                <div className="videoInfo border-b flex py-2 gap-4 items-center justify-between">
+                <div className="videoInfo border-b flex py-2 gap-4 relative items-center z-0 justify-between">
                     <img
                         src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
                         alt="Avatar" className="w-8 h-8" />
@@ -52,8 +52,8 @@ function VideoDetail() {
                     </button>
                     <PlayListDropDown videoId={videoData._id} />
                 </div>
-                <div className="notes mt-4 border-b">
-                    <h2 className="text-3xl drop-shadow-lg">My Notes</h2>
+                <div className="notes mt-4 border-b z-0 relative">
+                    <h2 className="text-3xl  drop-shadow-lg">My Notes</h2>
                 </div>
             </div>
             <VideoListings />
