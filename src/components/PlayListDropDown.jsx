@@ -38,7 +38,7 @@ function PlayListDropDown({ videoId }) {
                             </li>
                         })}
                     </div>
-                    <button onClick={() => { setViewPlaylistDiaglog(true); showDrpDwn(false) }} className="del__button py-2 text-slate-600 flex px-4  items-center justify-start w-full   text-sm hover:bg-slate-100 ">
+                    <button onClick={() => { setViewPlaylistDiaglog(true); setShowDrpDown(false) }} className="del__button py-2 text-slate-600 flex px-4  items-center justify-start w-full   text-sm hover:bg-slate-100 ">
                         <p className=" drop-shadow-lg">Create New Playlist</p>
                     </button>
 
